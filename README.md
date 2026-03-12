@@ -36,7 +36,7 @@ This project highlights the following **backend and data engineering skills**:
 ## 📂 Project Structure
 
 ```
-ipl_analytics_api/
+IPL_API_FLASK/
 │
 ├── app.py                # Flask API routes
 ├── data_loader.py        # Dataset loading module
