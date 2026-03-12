@@ -1,137 +1,414 @@
-# IPL Team Comparison API
+# 🏏 IPL Analytics REST API
 
-This project is a Flask web application that provides APIs to fetch and compare IPL teams' statistics, including team records, batting records, and bowling records. It pulls data from Google Sheets, processes it, and returns the results in JSON format.
+A **Flask-based analytics API** that provides detailed statistics and insights from **IPL match and ball-by-ball datasets**.
 
-## Table of Contents
+The system exposes multiple **REST endpoints** to analyze **teams, batsmen, and bowlers performance across IPL seasons**.
 
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [API Endpoints](#api-endpoints)
-- [Contributing](#contributing)
-- [License](#license)
+This project demonstrates **backend API development**, **data analytics using Pandas**, and **modular Python architecture**.
 
-## Features
+---
 
-- Fetch a list of IPL teams.
-- Compare two IPL teams based on historical match data.
-- Retrieve overall records of a specific team.
-- Get individual batting and bowling records of players.
+## 🚀 Features
 
-## Installation
+- 📊 **Team statistics and head-to-head analytics**
+- 🏏 **Batsman performance analysis**
+- 🎯 **Bowler performance analysis**
+- 📈 **Match dataset analytics using Pandas**
+- ⚡ **RESTful API built with Flask**
+- 🧩 **Modular and scalable code architecture**
+- 📦 **JSON-based API responses**
 
-To set up the project locally, follow these steps:
+---
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/yourusername/ipl-team-comparison-api.git
-   cd ipl-team-comparison-api
+## 🧠 What This Project Demonstrates
 
+This project highlights the following **backend and data engineering skills**:
 
+- **REST API development using Flask**
+- **Data analysis using Pandas and NumPy**
+- **API design and modular architecture**
+- **JSON serialization for analytics responses**
+- **Working with real-world sports datasets**
+- **Clean separation of data layer, analytics layer, and API layer**
 
+---
 
-Here’s a structured requirements.txt and a README.md file for your project. These will help others understand how to set up and use your Flask application.
+## 📂 Project Structure
 
-requirements.txt
-This file lists all the necessary packages for your project:
+```
+ipl_analytics_api/
+│
+├── app.py                # Flask API routes
+├── data_loader.py        # Dataset loading module
+├── team_stats.py         # Team analytics engine
+├── player_stats.py       # Player analytics engine
+│
+└── README.md
+```
 
-makefile
-Copy code
-Flask==2.0.3
-pandas==1.5.3
-numpy==1.24.2
-README.md
-Here's a comprehensive README.md file for your project:
+---
 
-markdown
-Copy code
-# IPL Team Comparison API
+## ⚙️ Architecture Overview
 
-This project is a Flask web application that provides APIs to fetch and compare IPL teams' statistics, including team records, batting records, and bowling records. It pulls data from Google Sheets, processes it, and returns the results in JSON format.
+The project follows a **layered architecture**.
 
-## Table of Contents
+```
+Client Request
+      │
+      ▼
+Flask API (app.py)
+      │
+      ▼
+Analytics Layer
+ ├── team_stats.py
+ └── player_stats.py
+      │
+      ▼
+Data Layer
+data_loader.py
+      │
+      ▼
+IPL Datasets (Google Sheets CSV)
+```
 
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [API Endpoints](#api-endpoints)
-- [Contributing](#contributing)
-- [License](#license)
+### Design Principles
 
-## Features
+- **Separation of Concerns**
+- **Reusable analytics modules**
+- **Single dataset loading point**
+- **Scalable API structure**
 
-- Fetch a list of IPL teams.
-- Compare two IPL teams based on historical match data.
-- Retrieve overall records of a specific team.
-- Get individual batting and bowling records of players.
+---
 
-## Installation
+## 📊 Data Sources
 
-To set up the project locally, follow these steps:
+The API uses **public IPL datasets**.
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/yourusername/ipl-team-comparison-api.git
-   cd ipl-team-comparison-api
-   
-Create a virtual environment:
-python -m venv venv
-source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+### Match Dataset
 
+Contains:
 
-Install the requirements:
-pip install -r requirements.txt
+- Team1
+- Team2
+- Winning team
+- Match stage
+- Match metadata
 
+### Ball-by-Ball Dataset
 
-Usage
+Contains:
 
-To run the application, use the following command:
+- Batter
+- Bowler
+- Runs scored
+- Extras
+- Wicket type
+- Match events
+
+These datasets are **loaded dynamically using Pandas**.
+
+---
+
+## 🔌 API Endpoints
+
+### 1️⃣ Get All Teams
+
+```
+GET /api/teams
+```
+
+Returns all IPL teams present in the dataset.
+
+Example response:
+
+```json
+{
+  "teams": [
+    "Chennai Super Kings",
+    "Mumbai Indians",
+    "Royal Challengers Bangalore"
+  ]
+}
+```
+
+---
+
+### 2️⃣ Team vs Team Record
+
+```
+GET /api/teamvteam
+```
+
+Query Parameters
+
+| Parameter | Description |
+|----------|-------------|
+| team1 | First team |
+| team2 | Second team |
+
+Example request:
+
+```
+/api/teamvteam?team1=Mumbai Indians&team2=Chennai Super Kings
+```
+
+Example response:
+
+```json
+{
+  "total_matches": 36,
+  "Mumbai Indians": 21,
+  "Chennai Super Kings": 15,
+  "draws": 0
+}
+```
+
+---
+
+### 3️⃣ Team Overall Record
+
+```
+GET /api/team-record
+```
+
+Query Parameters
+
+| Parameter | Description |
+|----------|-------------|
+| team | Team name |
+
+Example:
+
+```
+/api/team-record?team=Mumbai Indians
+```
+
+Returns:
+
+- matches played  
+- wins  
+- losses  
+- titles  
+- record against all teams  
+
+---
+
+### 4️⃣ Batsman Analytics
+
+```
+GET /api/batting-record
+```
+
+Query Parameters
+
+| Parameter | Description |
+|----------|-------------|
+| batsman | Player name |
+
+Example:
+
+```
+/api/batting-record?batsman=Virat Kohli
+```
+
+Returns:
+
+- innings
+- runs
+- average
+- strike rate
+- fours
+- sixes
+- fifties
+- hundreds
+- highest score
+- performance vs each team
+
+---
+
+### 5️⃣ Bowler Analytics
+
+```
+GET /api/bowling-record
+```
+
+Query Parameters
+
+| Parameter | Description |
+|----------|-------------|
+| bowler | Player name |
+
+Example:
+
+```
+/api/bowling-record?bowler=Jasprit Bumrah
+```
+
+Returns:
+
+- wickets
+- economy rate
+- bowling average
+- strike rate
+- best figures
+- 3+ wicket hauls
+
+---
+
+## 🧩 Internal Analytics Functions
+
+The analytics engine contains **internal functions** that power the API.
+
+### 📊 Team Analytics (`team_stats.py`)
+
+| Function | Purpose |
+|--------|---------|
+| teamsAPI() | Returns list of all IPL teams |
+| teamVteamAPI(team1, team2) | Calculates head-to-head record |
+| team1vsteam2(team, team2) | Detailed team vs team record |
+| allRecord(team) | Calculates overall team performance |
+| team_record_API(team) | Builds full team analytics response |
+
+### 🏏 Player Analytics (`player_stats.py`)
+
+#### Batting Functions
+
+| Function | Purpose |
+|--------|---------|
+| batsmanRecord(batsman, df) | Calculates full batting statistics |
+| batsmanVsTeam(batsman, team, df) | Batting stats against specific team |
+| batsmanAPI(batsman) | Generates batsman analytics response |
+
+#### Bowling Functions
+
+| Function | Purpose |
+|--------|---------|
+| bowlerRun(x) | Calculates runs conceded |
+| bowlerWicket(x) | Determines valid wickets |
+| bowlerRecord(bowler, df) | Calculates bowling statistics |
+| bowlerVsTeam(bowler, team, df) | Bowling stats vs team |
+| bowlerAPI(bowler) | Generates bowler analytics response |
+
+---
+
+## ⚠️ Functions Implemented but Not Yet Exposed as APIs
+
+These analytics capabilities already exist internally and can easily become future endpoints.
+
+| Function | Possible Future API |
+|---------|---------------------|
+| team1vsteam2() | `/api/team-vs-team-detailed` |
+| allRecord() | `/api/team-overall` |
+| batsmanVsTeam() | `/api/batsman-vs-team` |
+| bowlerVsTeam() | `/api/bowler-vs-team` |
+
+Example potential endpoint:
+
+```
+GET /api/batsman-vs-team?batsman=Virat Kohli&team=CSK
+```
+
+---
+
+## 🛠 Installation
+
+### Clone repository
+
+```bash
+git clone https://github.com/yourusername/ipl-analytics-api.git
+cd ipl-analytics-api
+```
+
+### Install dependencies
+
+```bash
+pip install flask pandas numpy
+```
+
+### Run the application
+
+```bash
 python app.py
-The application will start at http://127.0.0.1:5000.
+```
 
-API Endpoints
-1. Home
-Endpoint: /
-Method: GET
-Description: Returns a simple greeting.
-2. Get Teams
-Endpoint: /api/teams
-Method: GET
-Description: Returns a list of all IPL teams.
-3. Compare Teams
-Endpoint: /api/teamvteam
-Method: GET
-Query Parameters:
-team1: Name of the first team.
-team2: Name of the second team.
-Description: Compares the two specified teams and returns their match statistics.
-4. Team Record
-Endpoint: /api/team-record
-Method: GET
-Query Parameters:
-team: Name of the team.
-Description: Returns the overall match record of the specified team.
-5. Batsman Record
-Endpoint: /api/batting-record
-Method: GET
-Query Parameters:
-batsman: Name of the batsman.
-Description: Returns the batting record of the specified player.
-6. Bowler Record
-Endpoint: /api/bowling-record
-Method: GET
-Query Parameters:
-bowler: Name of the bowler.
-Description: Returns the bowling record of the specified player.
-Contributing
-Contributions are welcome! Please feel free to submit a pull request or raise an issue if you have any suggestions or improvements.
+Server will start at:
 
-License
-This project is licensed under the MIT License. See the LICENSE file for more information.
+```
+http://127.0.0.1:5000
+```
 
-markdown:
-### Key Points in the README
-- **Features Section**: Lists the capabilities of the API.
-- **Installation Section**: Provides clear instructions for setting up the environment.
-- **Usage Section**: Explains how to run the application.
-- **API Endpoints Section**: Details each API endpoint for easy reference.
+---
+
+## 🧪 Example API Requests
+
+### Get Teams
+
+```
+http://127.0.0.1:5000/api/teams
+```
+
+### Team vs Team
+
+```
+http://127.0.0.1:5000/api/teamvteam?team1=Mumbai Indians&team2=Chennai Super Kings
+```
+
+### Batsman Record
+
+```
+http://127.0.0.1:5000/api/batting-record?batsman=Virat Kohli
+```
+
+### Bowler Record
+
+```
+http://127.0.0.1:5000/api/bowling-record?bowler=Jasprit Bumrah
+```
+
+---
+
+## 📈 Potential Improvements
+
+Future enhancements could include:
+
+- Player leaderboard APIs
+- Orange Cap & Purple Cap endpoints
+- Points table generation
+- API documentation using **Swagger / OpenAPI**
+- Database integration (**PostgreSQL / DuckDB**)
+- API caching
+- Docker containerization
+- Deployment to **AWS / Render / Railway**
+
+---
+
+## 🧰 Tech Stack
+
+| Technology | Purpose |
+|-----------|---------|
+| Python | Programming language |
+| Flask | REST API framework |
+| Pandas | Data analysis |
+| NumPy | Numerical computation |
+| JSON | API response format |
+
+---
+
+## 🎯 Learning Outcomes
+
+This project helped build understanding of:
+
+- **REST API design**
+- **Data processing pipelines**
+- **Python modular architecture**
+- **Sports analytics systems**
+- **Backend system organization**
+
+---
+
+## 👤 Author
+
+**Rudra**
+
+B.Tech Final Year Student  
+Aspiring **MLOps Engineer**
