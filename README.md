@@ -8,7 +8,7 @@ This project demonstrates **backend API development**, **data analytics using Pa
 
 ---
 
-## 🚀 Features
+# 🚀 Features
 
 - 📊 **Team statistics and head-to-head analytics**
 - 🏏 **Batsman performance analysis**
@@ -20,7 +20,7 @@ This project demonstrates **backend API development**, **data analytics using Pa
 
 ---
 
-## 🧠 What This Project Demonstrates
+# 🧠 What This Project Demonstrates
 
 This project highlights the following **backend and data engineering skills**:
 
@@ -33,7 +33,7 @@ This project highlights the following **backend and data engineering skills**:
 
 ---
 
-## 📂 Project Structure
+# 📂 Project Structure
 
 ```
 IPL_API_FLASK/
@@ -42,13 +42,18 @@ IPL_API_FLASK/
 ├── data_loader.py        # Dataset loading module
 ├── team_stats.py         # Team analytics engine
 ├── player_stats.py       # Player analytics engine
+├── requirements.txt      # Project dependencies
 │
-└── README.md
+├── .gitignore
+├── LICENSE
+├── README.md
+│
+└── .idea/                # IDE configuration files
 ```
 
 ---
 
-## ⚙️ Architecture Overview
+# ⚙️ Architecture Overview
 
 The project follows a **layered architecture**.
 
@@ -68,7 +73,7 @@ Data Layer
 data_loader.py
       │
       ▼
-IPL Datasets (Google Sheets CSV)
+IPL Datasets (CSV / Google Sheets)
 ```
 
 ### Design Principles
@@ -80,7 +85,7 @@ IPL Datasets (Google Sheets CSV)
 
 ---
 
-## 📊 Data Sources
+# 📊 Data Sources
 
 The API uses **public IPL datasets**.
 
@@ -109,9 +114,9 @@ These datasets are **loaded dynamically using Pandas**.
 
 ---
 
-## 🔌 API Endpoints
+# 🔌 API Endpoints
 
-### 1️⃣ Get All Teams
+## 1️⃣ Get All Teams
 
 ```
 GET /api/teams
@@ -133,7 +138,7 @@ Example response:
 
 ---
 
-### 2️⃣ Team vs Team Record
+## 2️⃣ Team vs Team Record
 
 ```
 GET /api/teamvteam
@@ -165,7 +170,7 @@ Example response:
 
 ---
 
-### 3️⃣ Team Overall Record
+## 3️⃣ Team Overall Record
 
 ```
 GET /api/team-record
@@ -193,7 +198,7 @@ Returns:
 
 ---
 
-### 4️⃣ Batsman Analytics
+## 4️⃣ Batsman Analytics
 
 ```
 GET /api/batting-record
@@ -226,7 +231,7 @@ Returns:
 
 ---
 
-### 5️⃣ Bowler Analytics
+## 5️⃣ Bowler Analytics
 
 ```
 GET /api/bowling-record
@@ -255,77 +260,22 @@ Returns:
 
 ---
 
-## 🧩 Internal Analytics Functions
+# 🛠 Installation
 
-The analytics engine contains **internal functions** that power the API.
-
-### 📊 Team Analytics (`team_stats.py`)
-
-| Function | Purpose |
-|--------|---------|
-| teamsAPI() | Returns list of all IPL teams |
-| teamVteamAPI(team1, team2) | Calculates head-to-head record |
-| team1vsteam2(team, team2) | Detailed team vs team record |
-| allRecord(team) | Calculates overall team performance |
-| team_record_API(team) | Builds full team analytics response |
-
-### 🏏 Player Analytics (`player_stats.py`)
-
-#### Batting Functions
-
-| Function | Purpose |
-|--------|---------|
-| batsmanRecord(batsman, df) | Calculates full batting statistics |
-| batsmanVsTeam(batsman, team, df) | Batting stats against specific team |
-| batsmanAPI(batsman) | Generates batsman analytics response |
-
-#### Bowling Functions
-
-| Function | Purpose |
-|--------|---------|
-| bowlerRun(x) | Calculates runs conceded |
-| bowlerWicket(x) | Determines valid wickets |
-| bowlerRecord(bowler, df) | Calculates bowling statistics |
-| bowlerVsTeam(bowler, team, df) | Bowling stats vs team |
-| bowlerAPI(bowler) | Generates bowler analytics response |
-
----
-
-## ⚠️ Functions Implemented but Not Yet Exposed as APIs
-
-These analytics capabilities already exist internally and can easily become future endpoints.
-
-| Function | Possible Future API |
-|---------|---------------------|
-| team1vsteam2() | `/api/team-vs-team-detailed` |
-| allRecord() | `/api/team-overall` |
-| batsmanVsTeam() | `/api/batsman-vs-team` |
-| bowlerVsTeam() | `/api/bowler-vs-team` |
-
-Example potential endpoint:
-
-```
-GET /api/batsman-vs-team?batsman=Virat Kohli&team=CSK
-```
-
----
-
-## 🛠 Installation
-
-### Clone repository
+## Clone repository
 
 ```bash
-git clone https://github.com/yourusername/ipl-analytics-api.git
-cd ipl-analytics-api
+git clone https://github.com/RudrTyagi1135/IPL_API_FLASK.git
+cd IPL_API_FLASK
 ```
 
-### Install dependencies
+## Install dependencies
 
 ```bash
-pip install flask pandas numpy
+pip install -r requirements.txt
 ```
 
-### Run the application
+## Run the application
 
 ```bash
 python app.py
@@ -339,7 +289,7 @@ http://127.0.0.1:5000
 
 ---
 
-## 🧪 Example API Requests
+# 🧪 Example API Requests
 
 ### Get Teams
 
@@ -367,7 +317,7 @@ http://127.0.0.1:5000/api/bowling-record?bowler=Jasprit Bumrah
 
 ---
 
-## 📈 Potential Improvements
+# 📈 Potential Improvements
 
 Future enhancements could include:
 
@@ -382,7 +332,7 @@ Future enhancements could include:
 
 ---
 
-## 🧰 Tech Stack
+# 🧰 Tech Stack
 
 | Technology | Purpose |
 |-----------|---------|
@@ -394,7 +344,7 @@ Future enhancements could include:
 
 ---
 
-## 🎯 Learning Outcomes
+# 🎯 Learning Outcomes
 
 This project helped build understanding of:
 
@@ -406,7 +356,7 @@ This project helped build understanding of:
 
 ---
 
-## 👤 Author
+# 👤 Author
 
 **Rudra**
 
