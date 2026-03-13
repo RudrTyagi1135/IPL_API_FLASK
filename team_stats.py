@@ -27,10 +27,10 @@ def teamVteamAPI(team1, team2):
     draws = total_matches - (matches_won_team1 + matches_won_team2)
 
     return {
-        'total_matches': total_matches,
-        team1: matches_won_team1,
-        team2: matches_won_team2,
-        'draws': draws
+        'total_matches': int(total_matches),
+        team1: int(matches_won_team1),
+        team2: int(matches_won_team2),
+        'draws': int(draws)
     }
 
 
